@@ -1,0 +1,43 @@
+/* Variables de colores claros */
+:root {
+    --background-color-light: #ffffff;
+    --text-color-light: #000000;
+    --primary-color-light: #007bff;
+    --secondary-color-light: #6c757d;
+  }
+  
+  /* Variables de colores oscuros */
+  [data-theme='dark'] {
+    --background-color-light: #121212;
+    --text-color-light: #ffffff;
+    --primary-color-light: #1e90ff;
+    --secondary-color-light: #6c757d;
+  }
+  
+  /* Estilo global */
+  body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+  }
+  
+  .nav-link {
+    color: var(--text-color-light);
+  }
+  
+  .navbar-toggler-icon {
+    color: var(--text-color-light);
+  }
+  
+  .card {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+  }
+  
+  /* Otros componentes globales pueden usar las variables de color */
+  
