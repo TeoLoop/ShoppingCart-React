@@ -1,136 +1,127 @@
-/* Card styles */
 .card {
-    display: flex;
-    align-items: center;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  height: 100%;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
+  border-color: rgba(59, 130, 246, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card-image-container {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-right: 20px;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+  background-color: white; /* Often product images need white bg if they have no transparency */
 }
 
 .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or cover depending on original images, contain is safer for products */
+  padding: 20px;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.card-image-container:hover .card-image {
-    transform: scale(1.1);
+.card:hover .card-image {
+  transform: scale(1.1) rotate(2deg);
 }
 
 .card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: left;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 12px;
 }
 
 .card-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-    transition: color 0.3s ease;
-}
-
-.card-title:hover {
-    color: #4CAF50;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
 }
 
 .card-description {
-    font-size: 1rem;
-    color: #777;
-    line-height: 1.4;
-    margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1; 
+  /* Truncate text logic */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card-price {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
 
-.add-button,
-.remove-button {
-    border: none;
-    border-radius: 25px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
-    max-width: 180px;
-    margin-top: 10px;
+.card-price::before {
+  content: '$';
+  font-size: 1rem;
+  color: var(--accent-primary);
+  margin-right: 4px;
 }
 
+.card-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Base button overrides using the global design system */
 .add-button {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.add-button:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
+  width: 100%;
+  cursor: pointer;
 }
 
 .remove-button {
-    background-color: #e53935;
-    color: white;
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: var(--danger) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  width: 100%;
+  box-shadow: none;
 }
 
 .remove-button:hover {
-    background-color: #d32f2f;
-    transform: translateY(-2px);
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .card {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
-    }
-
-    .card-image-container {
-        margin-bottom: 15px;
-    }
-
-    .card-title {
-        font-size: 1.1rem;
-    }
-
-    .card-price {
-        font-size: 1rem;
-    }
-
-    .add-button,
-    .remove-button {
-        width: 100%;
-    }
+  background: var(--danger) !important;
+  color: white !important;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
 }

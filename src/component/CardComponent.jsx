@@ -16,41 +16,40 @@ export const CardComponent = ({ id, title, image, description, price, handlerAdd
         setAdded(false);
     };
 
-    const checkAdded = () => {
+    useEffect(() => {
         const boolean = shoppingList.some((product) => product.id === id);
         setAdded(boolean);
-    };
-
-    useEffect(() => {
-        checkAdded();
-    }, [shoppingList]);
+    }, [shoppingList, id]);
 
     return (
-        <div className="card">
+        <div className="card animate-fade-in">
             <div className="card-image-container">
                 <img src={image} alt={title} className="card-image" />
             </div>
             <div className="card-content">
                 <h3 className="card-title">{title}</h3>
                 <p className="card-description">{description}</p>
-                <p className="card-price">U$S {price}</p>
-                {
-                    added
-                        ? <button
+                <p className="card-price">{price}</p>
+                
+                <div className="card-actions">
+                    {added ? (
+                        <button
                             type="button"
-                            className="remove-button"
+                            className="btn-primary remove-button add-button"
                             onClick={removeProduct}
                         >
-                            Quitar del carrito
+                            Remove from Cart
                         </button>
-                        : <button
+                    ) : (
+                        <button
                             type="button"
-                            className="add-button"
+                            className="btn-primary add-button"
                             onClick={addProduct}
                         >
-                            Agregar al carrito
+                            Add to Cart
                         </button>
-                }
+                    )}
+                </div>
             </div>
         </div>
     );
